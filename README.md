@@ -8,6 +8,8 @@
 </div>
 <br>
 
+This project is a toy example of a graph-based framework for feature calculation and event triggers. It demonstrates how to use networkx to manage dependencies between features and event triggers. The project is designed to be extensible and can be used as a starting point for building more complex systems.
+
 ## Table of Contents
 
 - [Architecture Overview](#architecture-overview)
