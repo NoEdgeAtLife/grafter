@@ -1,0 +1,122 @@
+[build-system]
+requires = ["setuptools>=72.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grafter"
+dynamic = ["version"]
+description = "GRaph-based frAmework for Feature calculaTion and Event tRiggers."
+readme = "README.md"
+requires-python = ">=3.12, <4"
+keywords = ["grafter"]
+authors = [
+    { name = "Kyzis Tse", email = "kyzistse@gmail.com" },
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "dask",
+    "dask-expr",
+    "numpy",
+    "pandas",
+    "lmdb",
+    "dask",
+    "networkx",
+    "PyYAML",
+    "typing_extensions > 4.0.0",
+    "typing_inspect",
+    "vaderSentiment",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pre-commit",
+  "ruff==0.7.0",
+]
+test = [
+  "pytest",
+  "pytest-cov",
+  "pytest-asyncio",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "build",
+    ".git",
+    ".venv",
+]
+
+[tool.ruff.format]
+docstring-code-format = false
+exclude = [
+    "docs/*",
+]
+
+
+[tool.ruff.lint]
+extend-select = [
+    "B",   # flake8-bugbear rules
+    "C4",  # Helps you write better list/set/dict comprehensions.
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "FA",  # Verifies files use from __future__ import annotations if a type is used in the module that can be rewritten using PEP 563.
+    "FURB",# Refurbishing and modernizing Python codebases
+    "G",   # flake8-logging-format rules
+    "I",   # isort
+    "ISC", # Encourage correct string literal concatenation.
+    "LOG", # Checks for issues using the standard library logging module.
+    "NPY", # Linting rules for numpy
+    "PERF",# Linting rules for performance
+    "PIE", # flake8-pie rules
+    "PT",  # flake8-pytest-style rules
+    "PYI", # Linting rules for type annotations.
+    "Q",   # Linting rules for quites
+    "T20", # Check for Print statements in python files.
+    "TCH", # Move type-only imports to a type-checking block.
+    "TID", # Helps you write tidier imports.
+    "TRY", # Prevent exception handling anti-patterns
+    "UP",  # pyupgrade
+    "W",   # pycodestyle warnings
+]
+extend-ignore = [
+    "ISC001", # Checks for implicitly concatenated strings on a single line.
+    "T201",
+    "TRY003",
+    "E203", # whitespace before ':'
+    "E266", # Too many leading '#' for block comment
+    "E402", # module level import not at top of file
+    "E501", # line too long
+    "E721", # Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+    "W605", # invalid escape sequence
+]
+exclude = [
+    "docs/*",
+    "**/business_logic.py",
+]
+
+[tool.ruff.lint.isort]
+known-local-folder = ["tests"]
+known-first-party = ["grafter*"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101", # asserts allowed in tests...
+    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+]
+"__init__.py" = ["F401"]
+
+[tool.setuptools.dynamic]
+version = { attr = "grafter.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["grafter", "grafter.*"]
+exclude = ["*tests*"]
+
+[tool.setuptools.package-data]
+grafter = ["*.json", "*.md", "*.txt"]

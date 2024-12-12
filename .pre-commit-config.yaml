@@ -1,0 +1,30 @@
+# pre-commit hooks require a user to have installed `pre-commit`:
+#   $ brew install pre-commit
+#  or maybe:
+#   $ apt install pre-commit
+# Then install the hooks within the repo:
+#   $ cd /PATH/TO/REPO
+#   $ pre-commit install
+repos:
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.7.0
+  hooks:
+    - id: ruff
+      args: [ --fix ]
+
+    - id: ruff-format
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+    -   id: trailing-whitespace
+    # ensures files are either empty or end with a blank line
+    -   id: end-of-file-fixer
+    # sorts requirements
+    -   id: requirements-txt-fixer
+    # valid python file
+    -   id: check-ast
+-   repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+    - id: flake8
